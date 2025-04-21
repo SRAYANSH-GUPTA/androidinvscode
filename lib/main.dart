@@ -35,6 +35,26 @@ class _MyHomePageState extends State<MyHomePage> {
   String _logs = 'No logs available';
   bool _isLoading = false;
 
+  @override
+  void initState() {
+    super.initState();
+    _setupCrashHandler();
+  }
+
+  void _setupCrashHandler() {
+    platform.setMethodCallHandler((MethodCall call) async {
+      if (call.method == 'onCrash') {
+        if (mounted) {
+          setState(() {
+            _logs = call.arguments.toString();
+          });
+        }
+        return true;
+      }
+      return null;
+    });
+  }
+
   Future<void> _getCrashLogs() async {
     setState(() {
       _isLoading = true;
