@@ -12,7 +12,7 @@ class SecondActivity : AppCompatActivity() {
         // Set up the crash button
         findViewById<Button>(R.id.btnCrash).setOnClickListener {
             // Simulate a crash
-            throw RuntimeException("This is a simulated crash from SecondActivity")
+            throw RuntimeException("This is a simulated crash from")
         }
     }
 }
